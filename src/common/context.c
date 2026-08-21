@@ -43,6 +43,7 @@ void initContext(void) {
   CREATE_INT_CONTEXT(nitrogenCycle,   "NITROGEN_CYCLE",   ARG_OFF, FLAG_YES);
   CREATE_INT_CONTEXT(anaerobic,       "ANAEROBIC",        ARG_OFF, FLAG_YES);
   CREATE_INT_CONTEXT(flooding,        "FLOODING",         ARG_OFF, FLAG_YES);
+  CREATE_INT_CONTEXT(carbonSaturation,"CARBON_SATURATION",ARG_OFF, FLAG_YES);
 
   // Flags, I/O
   CREATE_INT_CONTEXT(doMainOutput,    "DO_MAIN_OUTPUT",   ARG_ON,  FLAG_YES);
@@ -60,6 +61,7 @@ void initContext(void) {
   CREATE_CHAR_CONTEXT(inputFile,      "INPUT_FILE",       DEFAULT_INPUT_FILE);
   CREATE_CHAR_CONTEXT(restartIn,      "RESTART_IN",       NO_DEFAULT_FILE);
   CREATE_CHAR_CONTEXT(restartOut,     "RESTART_OUT",      NO_DEFAULT_FILE);
+  CREATE_CHAR_CONTEXT(debugLogPrefix, "DEBUG_LOG_PREFIX", NO_DEFAULT_FILE);
   // clang-format on
 
   // Other
@@ -206,6 +208,12 @@ void validateContext(void) {
 
   if (ctx.anaerobic && !ctx.waterHResp) {
     logError("anaerobic requires water-hresp to be turned on\n");
+    hasError = 1;
+  }
+
+  if (ctx.carbonSaturation && !ctx.litterPool) {
+    logError("carbon-saturation requires litter-pool to be "
+             "turned on\n");
     hasError = 1;
   }
 
