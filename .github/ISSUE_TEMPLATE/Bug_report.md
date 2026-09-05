@@ -13,9 +13,9 @@ In the format "When I do X, I expect Y but observe Z"
 ### To Reproduce
 
 Include all relevant information to reproduce the error, if possible, including:
-- sipnet command run, with all command line options
-- input files used that show the problem
-- output files from the above
+1. `sipnet` command run, with all command line options
+2. Input files used that show the problem
+3. Output files from the above
 
 ### Expected Behavior
 
